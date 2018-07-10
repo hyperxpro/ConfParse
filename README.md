@@ -1,6 +1,52 @@
 # ConfParse
 ConfParse is a config format, parser and API for Java
 
+#Config Data Building
+```Java
+-----------------------
+Build Config Data From String Data
+-------------------------------------------------------------------------------------
+        String Data = "Server:\n"
+                + "\n"
+                + "	TotalServer 15";
+
+        ConfParseConfig confParse = ConfParse.fromData(Data).BuildFromData();
+-------------------------------------------------------------------------------------
+
+-----------------------
+Build Config Data From Web Data
+
+        ConfParseConfig confParse = ConfParse.fromURL(new URL("http://localhost/Data.txt")).buildFromURL();
+-------------------------------------------------------------------------------------
+
+-----------------------
+Build Config Data From File
+
+        ConfParseConfig confParse = ConfParse.fromFile(new File("D://Data.txt")).BuildFromFile();
+-------------------------------------------------------------------------------------
+
+-----------------------
+Build Config Data From Path
+
+	    ConfParseConfig confParse = ConfParse.fromFilePath(new File("D://Data.txt").toPath()).BuildFromFile();
+		
+-------------------------------------------------------------------------------------
+
+-----------------------
+Build Config Data From FileName
+
+	    ConfParseConfig confParse = ConfParse.fromFileName("D://Data.txt").BuildFromFile();
+		
+-------------------------------------------------------------------------------------
+
+-----------------------
+Build Config Data From URI
+
+	    ConfParseConfig confParse = ConfParse.fromFileName(new URI("file:///D:/Data.txt")).BuildFromFile();
+		
+-------------------------------------------------------------------------------------
+```
+
 # ConfParse Config File Format
 ```Java
 # Comment Supported
@@ -46,13 +92,10 @@ public class Main {
 
             // Create a config from a config URL
             {
-                confParse = ConfParse.from(new URL("http://localhost/Data.txt")).buildFromURL();
+                confParse = ConfParse.fromURL(new URL("http://localhost/Data.txt")).buildFromURL();
             }
 
-            // Create a config from config File
-            {
-                confParse = ConfParse.from("D://Data.txt").build();
-            }
+            
 
             // Check If The Header 'Server' And The Key 'TotalServer' Is Available
             // True = Header and Key Available, False = Header Or Key Not Available
