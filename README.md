@@ -1,7 +1,7 @@
 # ConfParse
 ConfParse is a config format, parser and API for Java
 
-#Config Data Building
+# Config Data Building
 ```Java
 -----------------------
 Build Config Data From String Data
