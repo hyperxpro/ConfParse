@@ -125,6 +125,29 @@ public class ConfParseConfig {
     }
 
     /**
+     * Creates a new ConfParse config from the given Data
+     *
+     * @param Data Data of ConfParse config file
+     * @throws ConfParseException If Something went wrong
+     */
+    protected ConfParseConfig(String Data) throws ConfParseException {
+        String[] ConfParseData = Data.split("\n");
+
+        for (String Line : ConfParseData) {
+            if (!Line.isEmpty() && !Line.startsWith("#")) {
+                Config.add(Line.trim());
+            }
+        }
+
+        // Check If Config Is Empty Or Not
+        if (Config.isEmpty()) {
+            throw new ConfParseEmptyConfigException("Config file data is empty");     // Throw ConfParseEmptyConfigException
+        }
+
+        parse(); // Start Parsing File
+    }
+
+    /**
      * Creates a new ConfParse config from the given file and builder instance.
      *
      * @param file The file.
@@ -171,6 +194,43 @@ public class ConfParseConfig {
     protected ConfParseConfig(URL url, ConfParse.ConfParser ConfParseBuilder) throws ConfParseException {
 
         this(url);
+
+        // Check if there are default values
+        if (ConfParseBuilder.getHeaders().isEmpty()) {
+            return;
+        }
+
+        // Sets possible default values
+        for (Header builderHeader : ConfParseBuilder.getHeaders()) {
+            Header header = headers.get(builderHeader.getName());
+            if (header == null) {
+                headers.put(builderHeader.getName(), builderHeader);
+            } else {
+                for (Key builderKey : builderHeader.getKeys()) {
+                    if (!header.hasKey(builderKey.getName())) {
+                        header.addKey(builderKey);
+                    } else {
+                        Key key = header.getKey(builderKey.getName());
+                        if (!key.hasValues()) {
+                            builderKey.getValues().forEach(key::addValue);
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    /**
+     * Creates a new ConfParse config from the given URL and builder instance.
+     *
+     * @param Data The Config Data
+     * @param ConfParseBuilder The builder instance.
+     * @throws ConfParseException If something went wrong.
+     */
+    protected ConfParseConfig(String Data, ConfParse.ConfParser ConfParseBuilder) throws ConfParseException {
+
+        this(Data);
 
         // Check if there are default values
         if (ConfParseBuilder.getHeaders().isEmpty()) {

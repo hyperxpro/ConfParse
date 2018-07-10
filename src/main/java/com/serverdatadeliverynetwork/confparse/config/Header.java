@@ -76,6 +76,7 @@ public class Header {
         return HeaderKeys.get(key);
     }
 
+
     /**
      * Returns the HeaderName of the key.
      *
@@ -93,4 +94,15 @@ public class Header {
     public List<Key> getKeys() {
         return Collections.unmodifiableList(new ArrayList<>(HeaderKeys.values()));
     }
+    
+    public List<Key> getKeysList() {
+
+        for (Key k : HeaderKeys.values()) {
+            System.out.println(k.getName());
+        }
+   
+        return new ArrayList<>(HeaderKeys.values());
+    }
+    
+   
 }

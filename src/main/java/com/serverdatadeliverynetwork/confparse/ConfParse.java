@@ -34,29 +34,30 @@ import com.serverdatadeliverynetwork.confparse.exceptions.ConfParseException;
  *
  * @author Aayush Atharva
  */
-
 public final class ConfParse {
 
     /**
-     * Creates a new ConfParse config from the given file name or file path.
+     * Creates a new ConfParse config fromFileName the given file name or file path.
      *
      * @param FileName The file name or path.
      * @return New ConfParse Config
-     * @throws ConfParseException If something went wrong during loading or parsing.
+     * @throws ConfParseException If something went wrong during loading or
+     * parsing.
      */
-    public static ConfParser from(String FileName) throws ConfParseException {
-        return from(new File(FileName));
+    public static ConfParser fromFileName(String FileName) throws ConfParseException {
+        return fromFile(new File(FileName));
     }
 
     /**
-     * Creates a new ConfParse config from the given path.
+     * Creates a new ConfParse config fromFileName the given path.
      *
      * @param FilePath The path.
      * @return A new ConfParse config.
-     * @throws ConfParseException If something went wrong during loading or parsing.
+     * @throws ConfParseException If something went wrong during loading or
+     * parsing.
      */
-    public static ConfParser from(Path FilePath) throws ConfParseException {
-        return from(FilePath.toFile());
+    public static ConfParser fromFilePath(Path FilePath) throws ConfParseException {
+        return fromFile(FilePath.toFile());
     }
 
     /**
@@ -66,33 +67,47 @@ public final class ConfParse {
      *
      * @param FileURI The URI.
      * @return A new ConfParse config.
-     * @throws ConfParseException If something went wrong during loading or 
+     * @throws ConfParseException If something went wrong during loading or
      * parsing.
      */
-    public static ConfParser from(URI FileURI) throws ConfParseException {
-        return from(new File(FileURI));
+    public static ConfParser fromFileURI(URI FileURI) throws ConfParseException {
+        return fromFile(new File(FileURI));
     }
 
     /**
-     * Creates a new ConfParse config from the given file.
+     * Creates a new ConfParse config fromFileName the given file.
      *
      * @param file The file.
      * @return A new ConfParse config.
-     * @throws ConfParseException If something went wrong during loading or parsing.
+     * @throws ConfParseException If something went wrong during loading or
+     * parsing.
      */
-    public static ConfParser from(File file) throws ConfParseException {
+    public static ConfParser fromFile(File file) throws ConfParseException {
         return new ConfParser(file);
     }
 
-     /**
-     * Creates a new ConfParse config from the given file.
+    /**
+     * Creates a new ConfParse config fromFileName the given file.
      *
      * @param URL The file URL.
      * @return A new ConfParse config.
-     * @throws ConfParseException If something went wrong during loading or parsing.
+     * @throws ConfParseException If something went wrong during loading or
+     * parsing.
      */
-    public static ConfParser from(URL URL) throws ConfParseException {
+    public static ConfParser fromURL(URL URL) throws ConfParseException {
         return new ConfParser(URL);
+    }
+
+    /**
+     * Creates a new ConfParse config fromFileName the given Data.
+     *
+     * @param Data
+     * @return The Config Data
+     * @throws ConfParseException If something went wrong during loading or
+     * parsing.
+     */
+    public static ConfParser fromData(String Data) throws ConfParseException {
+        return new ConfParser(Data);
     }
 
     /**
@@ -109,6 +124,11 @@ public final class ConfParse {
          * The Config File URL
          */
         private URL URL;
+
+        /**
+         * The Config File Data
+         */
+        private String Data;
 
         /**
          * All default headers for the Config.
@@ -133,6 +153,10 @@ public final class ConfParse {
             this.URL = URL;
         }
 
+        public ConfParser(String Data) {
+            this.Data = Data;
+        }
+
         /**
          * Adds a default header with the given key and the values.
          *
@@ -143,7 +167,7 @@ public final class ConfParse {
          */
         public ConfParser def(Header header, Key key, Value... values) {
             Header h = Headers.get(header.getName());
-            
+
             if (h != null) {
                 Key k = h.getKey(key.getName());
                 if (k != null) {
@@ -151,19 +175,19 @@ public final class ConfParse {
                         k.addValue(value);
                     }
                 } else {
-                    
+
                     for (Value value : values) {
                         key.addValue(value);
                     }
-                    
+
                     h.addKey(key);
                 }
             } else {
-                
+
                 for (Value value : values) {
                     key.addValue(value);
                 }
-                
+
                 header.addKey(key);
 
                 Headers.put(header.getName(), header);
@@ -173,25 +197,36 @@ public final class ConfParse {
         }
 
         /**
-         * Builds the ConfParse config from this builder based on File.
+         * Builds the ConfParse config fromFileName this builder based on File.
          *
          * @return The parsed ConfParse config.
          * @throws ConfParseException If something went wrong during the
          * parsing.
          */
-        public ConfParseConfig build() throws ConfParseException {
+        public ConfParseConfig BuildFromFile() throws ConfParseException {
             return new ConfParseConfig(File, this);
         }
 
         /**
-         * Builds the ConfParse config from this builder based on URL.
+         * Builds the ConfParse config fromFileName this builder based on URL.
          *
          * @return The parsed ConfParse config.
          * @throws ConfParseException If something went wrong during the
          * parsing.
          */
-        public ConfParseConfig buildFromURL() throws ConfParseException {
+        public ConfParseConfig BuildFromURL() throws ConfParseException {
             return new ConfParseConfig(URL, this);
+        }
+
+        /**
+         * Builds the ConfParse config fromFileName this builder based passed Data
+         *
+         * @return The parsed ConfParse config.
+         * @throws ConfParseException If something went wrong during the
+         * parsing.
+         */
+        public ConfParseConfig BuildFromData() throws ConfParseException {
+            return new ConfParseConfig(Data, this);
         }
 
         /**
