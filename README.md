@@ -181,9 +181,9 @@ public class Main {
     public static void main(String[] args) throws ConfParseException {
         try {
             // Create the cope and add the default header
-            ConfParseConfig confParse = ConfParse.from("D://Data.ConfParse")
+            ConfParseConfig confParse = ConfParse.fromFileName("D://Data.ConfParse")
                     .def(new Header("Server"), new Key("AsiaServerA"), new Value("MumbaiServerA"), new Value("100.100.100.108"), new Value("udp:53"))
-                    .build();
+                    .BuildFromFile();
 
             // No need to check if the header or key exists
             // because we have the default values
