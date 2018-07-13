@@ -92,7 +92,7 @@ public class Main {
 
             // Create a config from a config File
             {
-                confParse = ConfParse.fromURL(new URL("http://localhost/Data.txt")).buildFromURL(); // Build Config From File
+                confParse = ConfParse.fromFile(new File("D://Data.txt")).BuildFromFile(); // Build Config From File
             }
 
             // Check If The Header 'Server' And The Key 'TotalServer' Is Available
