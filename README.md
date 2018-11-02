@@ -1,7 +1,8 @@
 # ConfParse
 ConfParse is a config format, parser and API for Java
 
-[![Build Status](https://travis-ci.com/hyperxpro/ConfParse.svg?branch=master](https://travis-ci.org/hyperxpro/ConfParse)
+[![Build Status](https://travis-ci.org/freeCodeCamp/how-to-contribute-to-open-source.svg?branch=master)](https://travis-ci.org/freeCodeCamp/how-to-contribute-to-open-source)
+
 
 # Config Data Building
 ```Java
