@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.serverdatadeliverynetwork.confparse;
+package com.aayushatharva.confparse;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -27,13 +27,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.serverdatadeliverynetwork.confparse.config.Header;
-import com.serverdatadeliverynetwork.confparse.config.Key;
-import com.serverdatadeliverynetwork.confparse.config.Value;
-import com.serverdatadeliverynetwork.confparse.exceptions.ConfParseEmptyConfigException;
-import com.serverdatadeliverynetwork.confparse.exceptions.ConfParseException;
-import com.serverdatadeliverynetwork.confparse.exceptions.ConfParseInvalidConfigException;
-import com.serverdatadeliverynetwork.confparse.exceptions.ConfParseLoadConfigException;
+import com.aayushatharva.confparse.config.Header;
+import com.aayushatharva.confparse.config.Key;
+import com.aayushatharva.confparse.config.Value;
+import com.aayushatharva.confparse.exceptions.ConfParseEmptyConfigException;
+import com.aayushatharva.confparse.exceptions.ConfParseException;
+import com.aayushatharva.confparse.exceptions.ConfParseInvalidConfigException;
+import com.aayushatharva.confparse.exceptions.ConfParseLoadConfigException;
 
 /**
  *
@@ -50,102 +50,6 @@ public class ConfParseConfig {
      * All headers from the config.
      */
     private Map<String, Header> headers = new HashMap<>();
-
-    /**
-     * Creates a new ConfParse config from the given file.
-     *
-     * @param file The config file.
-     * @throws ConfParseException If something went wrong.
-     */
-    protected ConfParseConfig(File file) throws ConfParseException {
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
-            String Line;
-            while ((Line = bufferedReader.readLine()) != null) {
-                // Check If Line Is Not Empty Or Line Is Not Comment
-                if (!Line.isEmpty() && !Line.startsWith("#")) {
-                    Config.add(Line.trim());
-                }
-            }
-        } catch (IOException e) {
-            throw new ConfParseLoadConfigException("Could not load config file '" + file.getName() + "'");   // Throw File Not Found ConfParseException
-        }
-
-        // Check If Config Is Empty Or Not
-        if (Config.isEmpty()) {
-            throw new ConfParseEmptyConfigException("Config file " + file.getName() + " is empty");     // Throw ConfParseEmptyConfigException
-        }
-
-        parse(); // Start Parsing File
-    }
-
-    /**
-     * Creates a new ConfParse config from the given file URL.
-     *
-     * @param URL URL of ConfParse config file
-     * @throws ConfParseException If Something went wrong
-     */
-    protected ConfParseConfig(URL URL) throws ConfParseException {
-
-        BufferedReader reader = null;
-        URLConnection connection;
-
-        try {
-            connection = URL.openConnection();
-            connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/58.0.1271.95 Safari/537.11");
-            connection.connect();
-
-            reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
-            String Line = null;
-            while ((Line = reader.readLine()) != null) {
-                if (!Line.isEmpty() && !Line.startsWith("#")) {
-                    Config.add(Line.trim());
-                }
-            }
-
-            reader.close();
-
-        } catch (IOException ex) {
-            throw new ConfParseLoadConfigException("Could not load config file data from '" + URL.toString() + "'");   // Throw File Not Found ConfParseException
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException ex) {
-                }
-            }
-        }
-
-        // Check If Config Is Empty Or Not
-        if (Config.isEmpty()) {
-            throw new ConfParseEmptyConfigException("Config file data at " + URL.toString() + " is empty");     // Throw ConfParseEmptyConfigException
-        }
-
-        parse(); // Start Parsing File
-    }
-
-    /**
-     * Creates a new ConfParse config from the given Data
-     *
-     * @param Data Data of ConfParse config file
-     * @throws ConfParseException If Something went wrong
-     */
-    protected ConfParseConfig(String Data) throws ConfParseException {
-        String[] ConfParseData = Data.split("\n");
-
-        for (String Line : ConfParseData) {
-            if (!Line.isEmpty() && !Line.startsWith("#")) {
-                Config.add(Line.trim());
-            }
-        }
-
-        // Check If Config Is Empty Or Not
-        if (Config.isEmpty()) {
-            throw new ConfParseEmptyConfigException("Config file data is empty");     // Throw ConfParseEmptyConfigException
-        }
-
-        parse(); // Start Parsing File
-    }
 
     /**
      * Creates a new ConfParse config from the given file and builder instance.
@@ -182,6 +86,33 @@ public class ConfParseConfig {
             }
         }
 
+    }
+
+    /**
+     * Creates a new ConfParse config from the given file.
+     *
+     * @param file The config file.
+     * @throws ConfParseException If something went wrong.
+     */
+    protected ConfParseConfig(File file) throws ConfParseException {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+            String Line;
+            while ((Line = bufferedReader.readLine()) != null) {
+                // Check If Line Is Not Empty Or Line Is Not Comment
+                if (!Line.isEmpty() && !Line.startsWith("#")) {
+                    Config.add(Line.trim());
+                }
+            }
+        } catch (IOException e) {
+            throw new ConfParseLoadConfigException("Could not load config file '" + file.getName() + "'");   // Throw File Not Found ConfParseException
+        }
+
+        // Check If Config Is Empty Or Not
+        if (Config.isEmpty()) {
+            throw new ConfParseEmptyConfigException("Config file " + file.getName() + " is empty");     // Throw ConfParseEmptyConfigException
+        }
+
+        parse(); // Start Parsing File
     }
 
     /**
@@ -222,6 +153,52 @@ public class ConfParseConfig {
     }
 
     /**
+     * Creates a new ConfParse config from the given file URL.
+     *
+     * @param URL URL of ConfParse config file
+     * @throws ConfParseException If Something went wrong
+     */
+    protected ConfParseConfig(URL URL) throws ConfParseException {
+
+        BufferedReader reader = null;
+        URLConnection connection;
+
+        try {
+            connection = URL.openConnection();
+            connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/58.0.1271.95 Safari/537.11");
+            connection.connect();
+
+            reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+            String Line;
+            while ((Line = reader.readLine()) != null) {
+                if (!Line.isEmpty() && !Line.startsWith("#")) {
+                    Config.add(Line.trim());
+                }
+            }
+
+            reader.close();
+
+        } catch (IOException ex) {
+            throw new ConfParseLoadConfigException("Could not load config file data from '" + URL.toString() + "'");   // Throw File Not Found ConfParseException
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException ex) {
+                }
+            }
+        }
+
+        // Check If Config Is Empty Or Not
+        if (Config.isEmpty()) {
+            throw new ConfParseEmptyConfigException("Config file data at " + URL.toString() + " is empty");     // Throw ConfParseEmptyConfigException
+        }
+
+        parse(); // Start Parsing File
+    }
+
+    /**
      * Creates a new ConfParse config from the given URL and builder instance.
      *
      * @param Data The Config Data
@@ -256,6 +233,29 @@ public class ConfParseConfig {
             }
         }
 
+    }
+
+    /**
+     * Creates a new ConfParse config from the given Data
+     *
+     * @param Data Data of ConfParse config file
+     * @throws ConfParseException If Something went wrong
+     */
+    protected ConfParseConfig(String Data) throws ConfParseException {
+        String[] ConfParseData = Data.split("\n");
+
+        for (String Line : ConfParseData) {
+            if (!Line.isEmpty() && !Line.startsWith("#")) {
+                Config.add(Line.trim());
+            }
+        }
+
+        // Check If Config Is Empty Or Not
+        if (Config.isEmpty()) {
+            throw new ConfParseEmptyConfigException("Config file data is empty");     // Throw ConfParseEmptyConfigException
+        }
+
+        parse(); // Start Parsing File
     }
 
     /**

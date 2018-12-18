@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.serverdatadeliverynetwork.confparse;
+package com.aayushatharva.confparse;
 
 import java.io.File;
 import java.net.URI;
@@ -25,10 +25,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.serverdatadeliverynetwork.confparse.config.Header;
-import com.serverdatadeliverynetwork.confparse.config.Key;
-import com.serverdatadeliverynetwork.confparse.config.Value;
-import com.serverdatadeliverynetwork.confparse.exceptions.ConfParseException;
+import com.aayushatharva.confparse.config.Header;
+import com.aayushatharva.confparse.config.Key;
+import com.aayushatharva.confparse.config.Value;
+import com.aayushatharva.confparse.exceptions.ConfParseException;
 
 /**
  *

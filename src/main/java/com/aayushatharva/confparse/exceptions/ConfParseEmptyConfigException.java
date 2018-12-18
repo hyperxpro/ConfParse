@@ -14,20 +14,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.serverdatadeliverynetwork.confparse.exceptions;
+package com.aayushatharva.confparse.exceptions;
 
 /**
  * 
  * @author Aayush Atharva
  */
-public class ConfParseLoadConfigException extends ConfParseException {
+public class ConfParseEmptyConfigException extends ConfParseException {
 
     /**
-     * Creates a new ConfParse load config exception with the given message.
+     * Creates a new ConfParse empty config exception with the given message.
      *
      * @param message The message.
      */
-    public ConfParseLoadConfigException(String message) {
+    public ConfParseEmptyConfigException(String message) {
         super(message);
     }
 }
