@@ -90,7 +90,7 @@ public final class ConfParse {
      * Creates a new ConfParse config fromFileName the given file.
      *
      * @param URL The file URL.
-     * @return A new ConfParse config.
+     * @return
      * @throws ConfParseException If something went wrong during loading or
      * parsing.
      */
@@ -101,8 +101,8 @@ public final class ConfParse {
     /**
      * Creates a new ConfParse config fromFileName the given Data.
      *
-     * @param Data
-     * @return The Config Data
+     * @param The Config Data
+     * @return A new ConfParse config.
      * @throws ConfParseException If something went wrong during loading or
      * parsing.
      */

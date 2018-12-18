@@ -1,6 +1,9 @@
 # ConfParse
 ConfParse is a config format, parser and API for Java
 
+[![Build Status](https://travis-ci.com/hyperxpro/ConfParse.svg?branch=master)](https://travis-ci.com/hyperxpro/ConfParse)
+
+
 # Config Data Building
 ```Java
 -----------------------
@@ -90,12 +93,10 @@ public class Main {
 
             ConfParseConfig confParse;
 
-            // Create a config from a config URL
+            // Create a config from a config File
             {
-                confParse = ConfParse.fromURL(new URL("http://localhost/Data.txt")).buildFromURL();
+                confParse = ConfParse.fromFile(new File("D://Data.txt")).BuildFromFile(); // Build Config From File
             }
-
-            
 
             // Check If The Header 'Server' And The Key 'TotalServer' Is Available
             // True = Header and Key Available, False = Header Or Key Not Available
@@ -181,9 +182,9 @@ public class Main {
     public static void main(String[] args) throws ConfParseException {
         try {
             // Create the cope and add the default header
-            ConfParseConfig confParse = ConfParse.from("D://Data.ConfParse")
+            ConfParseConfig confParse = ConfParse.fromFileName("D://Data.ConfParse")
                     .def(new Header("Server"), new Key("AsiaServerA"), new Value("MumbaiServerA"), new Value("100.100.100.108"), new Value("udp:53"))
-                    .build();
+                    .BuildFromFile();
 
             // No need to check if the header or key exists
             // because we have the default values
