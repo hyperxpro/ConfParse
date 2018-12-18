@@ -74,11 +74,11 @@ ServersInformation:
 ## Simple Parsing
 Code: 
 ```Java
-package com.serverdatadeliverynetwork.confparse;
+package com.aayushatharva.confparse.example;
 
-import com.serverdatadeliverynetwork.confparse.config.Header;
-import com.serverdatadeliverynetwork.confparse.config.Key;
-import com.serverdatadeliverynetwork.confparse.exceptions.ConfParseException;
+import com.aayushatharva.confparse.config.Header;
+import com.aayushatharva.confparse.config.Key;
+import com.aayushatharva.confparse.exceptions.ConfParseException;
 import java.net.URL;
 
 /**
@@ -165,12 +165,12 @@ Server:
 ```
 Code: 
 ```Java
-package com.serverdatadeliverynetwork.confparse;
+package com.aayushatharva.confparse.example;
 
-import com.serverdatadeliverynetwork.confparse.config.Header;
-import com.serverdatadeliverynetwork.confparse.config.Key;
-import com.serverdatadeliverynetwork.confparse.config.Value;
-import com.serverdatadeliverynetwork.confparse.exceptions.ConfParseException;
+import com.aayushatharva.confparse.config.Header;
+import com.aayushatharva.confparse.config.Key;
+import com.aayushatharva.confparse.config.Value;
+import com.aayushatharva.confparse.exceptions.ConfParseException;
 
 
 /**
