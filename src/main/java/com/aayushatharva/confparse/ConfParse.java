@@ -37,7 +37,7 @@ import com.aayushatharva.confparse.exceptions.ConfParseException;
 public final class ConfParse {
 
     /**
-     * Creates a new ConfParse config fromFileName the given file name or file path.
+     * Creates a new ConfParse config from the given file name or file path.
      *
      * @param FileName The file name or path.
      * @return New ConfParse Config
@@ -49,7 +49,7 @@ public final class ConfParse {
     }
 
     /**
-     * Creates a new ConfParse config fromFileName the given path.
+     * Creates a new ConfParse config from the given path.
      *
      * @param FilePath The path.
      * @return A new ConfParse config.
@@ -75,7 +75,7 @@ public final class ConfParse {
     }
 
     /**
-     * Creates a new ConfParse config fromFileName the given file.
+     * Creates a new ConfParse config from the given file.
      *
      * @param file The file.
      * @return A new ConfParse config.
@@ -87,10 +87,10 @@ public final class ConfParse {
     }
 
     /**
-     * Creates a new ConfParse config fromFileName the given file.
+     * Creates a new ConfParse config from the given file.
      *
      * @param URL The file URL.
-     * @return
+     * @return A new ConfParse config.
      * @throws ConfParseException If something went wrong during loading or
      * parsing.
      */
@@ -99,9 +99,9 @@ public final class ConfParse {
     }
 
     /**
-     * Creates a new ConfParse config fromFileName the given Data.
+     * Creates a new ConfParse config from the given Data.
      *
-     * @param The Config Data
+     * @param Data Config Data
      * @return A new ConfParse config.
      * @throws ConfParseException If something went wrong during loading or
      * parsing.
@@ -153,6 +153,11 @@ public final class ConfParse {
             this.URL = URL;
         }
 
+        /**
+         * Creates a new builder for the given Config Data.
+         *
+         * @param Data The config file Data.
+         */
         public ConfParser(String Data) {
             this.Data = Data;
         }
@@ -197,7 +202,7 @@ public final class ConfParse {
         }
 
         /**
-         * Builds the ConfParse config fromFileName this builder based on File.
+         * Builds the ConfParse config from this builder based on File.
          *
          * @return The parsed ConfParse config.
          * @throws ConfParseException If something went wrong during the
@@ -208,7 +213,7 @@ public final class ConfParse {
         }
 
         /**
-         * Builds the ConfParse config fromFileName this builder based on URL.
+         * Builds the ConfParse config from this builder based on URL.
          *
          * @return The parsed ConfParse config.
          * @throws ConfParseException If something went wrong during the
@@ -219,7 +224,8 @@ public final class ConfParse {
         }
 
         /**
-         * Builds the ConfParse config fromFileName this builder based passed Data
+         * Builds the ConfParse config from this builder based passed
+         * Data
          *
          * @return The parsed ConfParse config.
          * @throws ConfParseException If something went wrong during the
