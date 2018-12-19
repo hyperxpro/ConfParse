@@ -3,6 +3,21 @@ ConfParse is a config format, parser and API for Java
 
 [![Build Status](https://travis-ci.com/hyperxpro/ConfParse.svg?branch=master)](https://travis-ci.com/hyperxpro/ConfParse)
 
+## How To Use AtomicCrypto In Project
+### Maven
+```Java
+<dependency>
+  <groupId>com.aayushatharva</groupId>
+  <artifactId>ConfParse</artifactId>
+  <version>1.2.1</version>
+</dependency>
+```
+
+### Gradle Groovy DSL
+```Java
+implementation 'com.aayushatharva:ConfParse:1.2.1'
+```
+
 
 # Config Data Building
 ```Java
