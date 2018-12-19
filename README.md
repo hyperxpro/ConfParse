@@ -3,7 +3,7 @@ ConfParse is a config format, parser and API for Java
 
 [![Build Status](https://travis-ci.com/hyperxpro/ConfParse.svg?branch=master)](https://travis-ci.com/hyperxpro/ConfParse)
 
-## How To Use AtomicCrypto In Project
+## How To Use ConfParse In Project
 ### Maven
 ```Java
 <dependency>
